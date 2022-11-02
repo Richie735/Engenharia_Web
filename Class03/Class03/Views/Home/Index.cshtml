@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Class03.Models.FileViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    long nF = 0;
+    long totalB = 0;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Upload">Submit New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            nF++;
+            totalB = totalB + item.Size;
+            <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                <a asp-controller="Home" asp-action="Download" asp-route-id=@item.Name target"_blank">Download</a>
+            </td>
+            <td>
+                <a asp-controller="Home" asp-action="Delete" asp-route-id=@item.Name onclick="return confirm ('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<br />
+<br />
+<p>Number of Documents: @nF </p>
+<p>Total Bytes: @totalB</p>
