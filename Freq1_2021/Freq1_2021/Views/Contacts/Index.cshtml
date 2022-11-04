@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Freq1_2021.Models.Contact>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Contacts</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NickName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amigo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NickName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amigo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Email">Edit</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
