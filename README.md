@@ -5,32 +5,53 @@ Notes from Web Engineering, a curricular unit, 1st semester of the 3rd year of c
 # Frequência 1
 
 1. Criar Modelo de Dados
-	Models → Add → Class 
-	→ Adicionar Biblioteca
-		using System.ComponentModel.DataAnnotations;
-	→ Adicionar Atributos
-		- Se é valor único → [Key]
-		- Se é obrigatório → [Required(ErrorMessage = "Required field")] (Boolean não precisaom de ErrorMessage)
-		- Tipo de Ficheiro (ex. PDF) → [RegularExpression(@"^.+\.([pP][dD][fF])$”)]
-		- Extenção Maxima → [StringLength(256, ErrorMessage = "{0} length can not exceed {1} characters")]
-		- Entenção Entre 2 Valores → [StringLength(50, MinimumLength = 3, ErrorMessage = "{0} length must be between {2} and {1}")]
-		- So pode ter letras → [RegularExpression(@"[a-zA-Z\d]{3,}", ErrorMessage="Not Valid")]
+
+		Models
+		→ Add 
+		→ Class 
+		→ Adicionar Biblioteca
+			using System.ComponentModel.DataAnnotations;
+		→ Adicionar Atributos
+	
+			- Se é valor único → [Key]
+			- Se é obrigatório → [Required(ErrorMessage = "Required field")] (Boolean não precisaom de ErrorMessage)
+			- Tipo de Ficheiro (ex. PDF) → [RegularExpression(@"^.+\.([pP][dD][fF])$”)]
+			- Extenção Maxima → [StringLength(256, ErrorMessage = "{0} length can not exceed {1} characters")]
+			- Entenção Entre 2 Valores → [StringLength(50, MinimumLength = 3, ErrorMessage = "{0} length must be between {2} and {1}")]
+			- So pode ter letras → [RegularExpression(@"[a-zA-Z\d]{3,}", ErrorMessage="Not Valid")]
+
 
 2. Criar Controlador
-	Controllers → Add → Controller 
-	→ MVC Controller with views, using Entity Framework (caso Db)
-		Model Class = Model criado antes
-		Data context class = + → mudar nome (NomeDb.Data.Context)
+
+		Controllers 
+		→ Add 
+		→ Controller 
+		→ MVC Controller with views, using Entity Framework (caso Db)
+			Model Class = Model criado antes
+			Data context class = + → mudar nome (NomeDb.Data.Context)
+
 
 3. Mudar a Home Pag
-	Program.cs → +/-linha 30 → alterar o pattern (pattern: "{controller=ControllerName}/{action=ControllerViewName}/{id?}");)
+
+		Program.cs 
+		→ +/-linha 30 
+		→ alterar o pattern (pattern: "{controller=ControllerName}/{action=ControllerViewName}/{id?}");)
+
 
 4. Preparar Data Base
-	Package Manager Console → "add-migration Name" → Esperar o fim da execução → "update-database"
+
+		Package Manager Console 
+		→ "add-migration Name" 
+		→ Esperar o fim da execução 
+		→ "update-database"
+
 
 5. Inicializar Data Base
-	Data → Add → Class 
-	→ Rename "DbInitializer.cs" → 
+
+		Data
+		→ Add 
+		→ Class 
+		→ Rename "DbInitializer.cs" → 
 	```C#
 	using DbName.Data;
 	using ProjectName.Models;
@@ -67,7 +88,9 @@ Notes from Web Engineering, a curricular unit, 1st semester of the 3rd year of c
 	    }
 	}
 	```
-	→ Ir ao Program.cs → Adicionar este codigo
+	
+		→ Ir ao Program.cs 
+		→ Adicionar este codigo
 	```C#
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.Extensions.DependencyInjection;
@@ -92,9 +115,13 @@ Notes from Web Engineering, a curricular unit, 1st semester of the 3rd year of c
 	if (!app.Environment.IsDevelopment())
 	```
 
+
 6. Executar
 
+
+
 ## Extras
+
 - Redirecionamento
 	```C#
 	app.MapControllerRoute(
@@ -104,9 +131,10 @@ Notes from Web Engineering, a curricular unit, 1st semester of the 3rd year of c
     );
 	```
 
+
 - Adicionar Novas Funções ao Controller
-	- Se o método servir para alterar apenas um atributo (ex comprar) não colocamos HttpPost
 	```C#
+	//Se o método servir para alterar apenas um atributo (ex comprar) não colocamos HttpPost
 	public async Task<IActionResult>Comprar(int? id)
 	{
 		if (id == null || _context.Carro == null)
@@ -126,10 +154,12 @@ Notes from Web Engineering, a curricular unit, 1st semester of the 3rd year of c
 	}
 	```
 
+
 - Ordenar a View
 	```C#
 	View(await _context.NomeDaClasse.OrderByDescending(x => x.ParametroDeOrdenaçao).ToListAsync());
 	```
+
 
 - Inserir Imagens sem criar pasta
 	```C#
@@ -150,6 +180,7 @@ Notes from Web Engineering, a curricular unit, 1st semester of the 3rd year of c
 	return View(carro);
 	}
 	```
+
 
 - Inserir Imagens e criar nova pasta
 	```C#
@@ -187,6 +218,7 @@ Notes from Web Engineering, a curricular unit, 1st semester of the 3rd year of c
 	}
 	```
 
+
 - Inserir mensagens de sucesso
 	```C#
 	//Controlador
@@ -199,5 +231,15 @@ Notes from Web Engineering, a curricular unit, 1st semester of the 3rd year of c
 	</p>
 	```
 
+
 - Inserir dados na base de dados
-	SQL server Object → SQL Server → localdb → Databases → Escolher Base de dados → Tables → Escolher Tabela → View Data → Adiconar dados nas linhas
+
+		SQL server Object
+		→ SQL Server
+		→ localdb 
+		→ Databases 
+		→ Escolher Base de dados 
+		→ Tables 
+		→ Escolher Tabela 
+		→ View Data 
+		→ Adiconar dados nas linhas
